@@ -45,12 +45,14 @@ def generate_facturx():
         with NamedTemporaryFile(
                 prefix='fx-api-outpdf-', suffix='.pdf') as output_pdf_file:
             request.files['pdf'].save(pdf_file.name)
+            facturx_level = request.form.get("facturx-level", "autodetect")
             app.logger.debug('pdf_file.name=%s', pdf_file.name)
             app.logger.debug('output_pdf_file.name=%s', output_pdf_file.name)
             app.logger.debug('attachments keys=%s', attachments.keys())
+            app.logger.debug('factur-x level=%s', facturx_level)
             generate_facturx_from_file(
                 pdf_file, xml_byte, output_pdf_file=output_pdf_file.name,
-                attachments=attachments)
+                facturx_level=facturx_level, attachments=attachments)
             output_pdf_file.seek(0)
             res = send_file(output_pdf_file.name, as_attachment=True)
             app.logger.info(

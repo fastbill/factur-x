@@ -59,6 +59,7 @@ This project also provides a webservice to generate a Factur-X invoice from a re
 
 * **pdf** -> PDF invoice (required)
 * **xml** -> factur-x.xml file (any profile, required)
+* **facturx_level** -> the level of the Factur-X XML file (Possible values: minimum, basicwl, basic, en16931. default 'autodetect', optional)
 * **attachment1** -> First attachment (optional)
 * **attachment2** -> Second attachment (optional)
 * ...
