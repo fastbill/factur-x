@@ -1,4 +1,4 @@
-FROM continuumio/miniconda:latest
+FROM python:3.8-slim-buster
 WORKDIR /usr/src/app
 ADD requirement.txt /usr/src/app
 ADD bin/facturx-webservice /usr/src/app/app.py
