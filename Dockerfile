@@ -1,9 +1,8 @@
-FROM python:3.9.1-alpine
-RUN apk add --update --no-cache g++ gcc libxslt-dev curl
+FROM continuumio/miniconda:latest
 WORKDIR /usr/src/app
 ADD requirement.txt /usr/src/app
-ADD bin/facturx-webservice /usr/src/app
+ADD bin/facturx-webservice /usr/src/app/app.py
 ADD facturx /usr/src/app/facturx
 RUN pip install --no-cache-dir -r requirement.txt
 EXPOSE 5000
-ENTRYPOINT ["python","facturx-webservice","-d","-s","0.0.0.0"]
+CMD ["gunicorn","--workers=4", "--bind", "0.0.0.0:5000","app:app"]
